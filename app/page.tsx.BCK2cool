@@ -6,19 +6,11 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [smoothScroll, setSmoothScroll] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(800);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setViewportHeight(window.innerHeight);
-    const handleResize = () => setViewportHeight(window.innerHeight);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -31,56 +23,34 @@ export default function Home() {
     return () => cancelAnimationFrame(animationFrame);
   }, [scrollY]);
 
-  // Curtains open slower - up to 200px, then stay open
-  const translateValue = Math.min(smoothScroll / 3, 200);
+  // Curtains open up to 200px, then stay open
+  const translateValue = Math.min(smoothScroll / 2, 200);
 
-  // Content scrolls up after curtains open
-  const contentScroll = Math.max(smoothScroll - 600, 0);
-
-  // First section fades in and stays visible, then fades out as it scrolls up
+  // First section fades in and stays visible
   let textOpacity;
-  if (smoothScroll < 250) {
-    textOpacity = smoothScroll / 250; // Fade in
-  } else if (contentScroll < 400) {
-    textOpacity = 1; // Stay visible
-  } else if (contentScroll < 800) {
-    textOpacity = 1 - ((contentScroll - 400) / 400); // Fade out as it scrolls
+  if (smoothScroll < 150) {
+    textOpacity = smoothScroll / 150; // Fade in: 0 to 1
   } else {
-    textOpacity = 0; // Completely gone
+    textOpacity = 1; // Stay at full opacity
   }
 
-  // Calculate when section 1 is completely out of viewport
-  // Section 1 fades out when contentScroll is 400-800, so it's gone at contentScroll 800
-  const section1Gone = contentScroll >= 800;
-  const buffer = 200; // Buffer after section 1 is gone
-  
-  // Second section fades in only after section 1 is completely faded out
+  // Second section fades in and stays visible
   let secondOpacity;
-  const fadeStartScroll = 600 + 800 + buffer; // 600 (scroll start) + 800 (section1 gone) + 200 (buffer) = 1600
-  const fadeEndScroll = fadeStartScroll + 400;
-  
-  if (smoothScroll < fadeStartScroll) {
+  if (smoothScroll < 550) {
     secondOpacity = 0;
-  } else if (smoothScroll < fadeEndScroll) {
-    secondOpacity = (smoothScroll - fadeStartScroll) / 400;
+  } else if (smoothScroll < 700) {
+    secondOpacity = (smoothScroll - 550) / 150; // Fade in: 0 to 1 over 150px
   } else {
-    secondOpacity = 1;
+    secondOpacity = 1; // Stay at full opacity
   }
+
+  // Content scrolls up after first section fades out
+  const contentScroll = Math.max(smoothScroll - 500, 0);
 
   return (
     <main className="relative">
-      {/* Debug info */}
-      <div className="fixed top-4 left-4 bg-black bg-opacity-75 text-white p-4 text-xs z-50 font-mono">
-        <p>smoothScroll: {Math.round(smoothScroll)}</p>
-        <p>contentScroll: {Math.round(contentScroll)}</p>
-        <p>viewportHeight: {viewportHeight}</p>
-        <p>fadeStartScroll: {Math.round(fadeStartScroll)}</p>
-        <p>section1 opacity: {textOpacity.toFixed(2)}</p>
-        <p>section2 opacity: {secondOpacity.toFixed(2)}</p>
-      </div>
-
-      {/* Scroll height control - increased to allow full fade */}
-      <div className="min-h-[400vh] bg-black"></div>
+      {/* Scroll height control */}
+      <div className="min-h-[300vh] bg-black"></div>
 
       {/* Fixed visual layer */}
       <div className="fixed inset-0 flex justify-center items-center overflow-hidden">
@@ -125,23 +95,19 @@ export default function Home() {
 
           {/* White scrolling content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10 overflow-hidden">
-            {/* White background column */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white shadow-lg max-w-[390px] w-full min-h-screen"></div>
-            </div>
-
             {/* Section 2: Invitation message - Fixed in background */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
+              <article className="bg-white shadow-lg p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
                 <p 
                   className="text-gray-800 text-center text-lg leading-relaxed transition-opacity duration-150"
                   style={{ opacity: secondOpacity }}
                 >
-                  Nos complace hacerte partícipe de este momento tan especial. <br /> Queremos invitarte a nuestra boda; un evento lleno de amor y alegría donde tu presencia será profundamente apreciada. <br /> Esperamos compartir contigo este día inolvidable y celebrar juntos el inicio de una nueva etapa en nuestras vidas.                </p>
+                  Nos complace hacerte partícipe de este momento tan especial. Queremos invitarte a nuestra boda, un evento lleno de amor y alegría, donde tu presencia será profundamente apreciada. Esperamos compartir contigo este día inolvidable y celebrar juntos el inicio de una nueva etapa en nuestras vidas.
+                </p>
               </article>
             </div>
 
-            {/* Section 1: Names and date - Scrolls up on top with transparent background */}
+            {/* Section 1: Names and date - Scrolls up on top */}
             <div 
               className="absolute inset-0 flex items-center justify-center"
               style={{
@@ -149,7 +115,7 @@ export default function Home() {
                 transition: 'transform 0.1s ease-out'
               }}
             >
-              <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
+              <article className="bg-white shadow-lg p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
                 <div>
                   <h1 
                     className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 text-center mb-4 transition-opacity duration-150"

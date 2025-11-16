@@ -1,2 +1,9 @@
 @import "tailwindcss";
 
+body {
+  font-family: "Great Vibes", cursive;
+}
+
+.font-great-vibes {
+  font-family: "Great Vibes", cursive;
+}

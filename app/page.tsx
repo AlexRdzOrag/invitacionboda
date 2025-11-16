@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -286,13 +285,12 @@ export default function Home() {
                 transform: `translateX(-${translateValue}px)`,
               }}
             >
-              <Image
-                src="/left.png"
+              <img
+                src={`${process.env.NODE_ENV === 'production' ? '/invitacionboda' : ''}/left.png`}
                 alt="Left decoration"
                 width={390}
                 height={844}
                 className="h-full w-auto"
-                priority
               />
             </div>
 
@@ -303,13 +301,12 @@ export default function Home() {
                 transform: `translateX(${translateValue}px)`,
               }}
             >
-              <Image
-                src="/right.png"
+              <img
+                src={`${process.env.NODE_ENV === 'production' ? '/invitacionboda' : ''}/right.png`}
                 alt="Right decoration"
                 width={390}
                 height={844}
                 className="h-full w-auto"
-                priority
               />
             </div>
           </div>
@@ -411,13 +408,12 @@ export default function Home() {
 
                   {/* Church Image - Placeholder for now */}
                   <div className="mt-6 rounded-lg overflow-hidden shadow-md">
-                    <Image
-                      src="/iglesia.jpg"
+                    <img
+                      src={`${process.env.NODE_ENV === 'production' ? '/invitacionboda' : ''}/iglesia.jpg`}
                       alt="Parroquia San Luis Obispo"
                       width={390}
                       height={260}
                       className="w-full h-auto object-cover"
-                      priority={false}
                     />
                   </div>
 
@@ -466,13 +462,12 @@ export default function Home() {
 
                   {/* Venue Image - Placeholder for now */}
                   <div className="mt-6 rounded-lg overflow-hidden shadow-md">
-                    <Image
-                      src="/thumbnail.jpeg"
+                    <img
+                      src={`${process.env.NODE_ENV === 'production' ? '/invitacionboda' : ''}/thumbnail.jpeg`}
                       alt="Auditorio Municipal San Luis"
                       width={390}
                       height={260}
                       className="w-full h-auto object-cover"
-                      priority={false}
                     />
                   </div>
 

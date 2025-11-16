@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // If your GitHub Pages repo is https://username.github.io/repo-name/
-  // uncomment and set basePath:
-  // basePath: '/repo-name',
+  basePath: '/invitacionboda',
 };
 
 export default nextConfig;

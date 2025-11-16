@@ -61,7 +61,8 @@ export default function Home() {
 
   // Background music autoplay
   useEffect(() => {
-    const audio = new Audio('/cancion.mpeg');
+    const basePath = process.env.NODE_ENV === 'production' ? '/invitacionboda' : '';
+    const audio = new Audio(`${basePath}/cancion.mpeg`);
     audio.loop = true;
     audio.volume = 0.3;
     audioRef.current = audio;

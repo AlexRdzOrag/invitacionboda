@@ -342,8 +342,40 @@ export default function Home() {
               <div className="bg-white shadow-lg max-w-[390px] w-full min-h-screen"></div>
             </div>
 
+            {/* Section 1: Names and date - Scrolls up on top with transparent background */}
+            <div 
+              className="absolute inset-0 flex items-center justify-center z-10"
+              style={{
+                transform: `translateY(-${contentScroll}px)`,
+                transition: 'transform 0.1s ease-out'
+              }}
+            >
+              <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
+                <div>
+                  <h1 
+                    className="text-4xl sm:text-5xl md:text-6xl font-great-vibes text-gray-900 text-center mb-4 transition-opacity duration-150"
+                    style={{ opacity: textOpacity }}
+                  >
+                    Ismael y Reyna
+                  </h1>
+                  <h3 
+                    className="text-center text-2xl mb-2 transition-opacity duration-150"
+                    style={{ opacity: textOpacity }}
+                  >
+                    27 de diciembre del 2025
+                  </h3>
+                  <h3 
+                    className="text-center text-2xl transition-opacity duration-150"
+                    style={{ opacity: textOpacity }}
+                  >
+                    05:00pm
+                  </h3>
+                </div>
+              </article>
+            </div>
+
             {/* Section 2: Invitation message - Fixed in background */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center z-0">
               <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
                 <div 
                   className="mb-6 flex flex-col items-center space-y-3 transition-opacity duration-150"
@@ -372,7 +404,7 @@ export default function Home() {
             </div>
 
             {/* Section 3: Family details - styled to match site */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center z-0">
               <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
                 <section
                   aria-labelledby="parents-title"
@@ -418,7 +450,7 @@ export default function Home() {
             </div>
 
             {/* Section 4: Church location - appears after section 3 fades out */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center z-0">
               <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
                 <section
                   aria-labelledby="church-title"
@@ -472,7 +504,7 @@ export default function Home() {
             </div>
 
             {/* Section 5: Event venue location - appears after section 4 fades out */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center z-0">
               <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
                 <section
                   aria-labelledby="venue-title"
@@ -533,7 +565,7 @@ export default function Home() {
             </div>
 
             {/* Section 6: RSVP WhatsApp - appears after section 5 fades out */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center z-0">
               <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
                 <section
                   aria-labelledby="rsvp-title"
@@ -558,38 +590,6 @@ export default function Home() {
                     </a>
                   </div>
                 </section>
-              </article>
-            </div>
-
-            {/* Section 1: Names and date - Scrolls up on top with transparent background */}
-            <div 
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                transform: `translateY(-${contentScroll}px)`,
-                transition: 'transform 0.1s ease-out'
-              }}
-            >
-              <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
-                <div>
-                  <h1 
-                    className="text-4xl sm:text-5xl md:text-6xl font-great-vibes text-gray-900 text-center mb-4 transition-opacity duration-150"
-                    style={{ opacity: textOpacity }}
-                  >
-                    Ismael y Reyna
-                  </h1>
-                  <h3 
-                    className="text-center text-2xl mb-2 transition-opacity duration-150"
-                    style={{ opacity: textOpacity }}
-                  >
-                    27 de diciembre del 2025
-                  </h3>
-                  <h3 
-                    className="text-center text-2xl transition-opacity duration-150"
-                    style={{ opacity: textOpacity }}
-                  >
-                    05:00pm
-                  </h3>
-                </div>
               </article>
             </div>
           </div>

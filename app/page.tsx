@@ -275,7 +275,6 @@ export default function Home() {
         </div>
       )}
 
-      {/** Debug info temporarily disabled
       <div className="fixed top-4 left-4 bg-black bg-opacity-75 text-white p-4 text-xs z-50 font-mono">
         <p>smoothScroll: {Math.round(smoothScroll)}</p>
         <p>contentScroll: {Math.round(contentScroll)}</p>
@@ -285,13 +284,14 @@ export default function Home() {
         <p>third opacity: {thirdOpacity.toFixed(2)}</p>
         <p>fourth opacity: {fourthOpacity.toFixed(2)}</p>
         <p>fifth opacity: {fifthOpacity.toFixed(2)}</p>
+        <p>sixth opacity: {sixthOpacity.toFixed(2)}</p>
         <p>secondFadeInStart: {secondFadeInStart}</p>
         <p>secondFadeOutEnd: {secondFadeOutEnd}</p>
         <p>thirdFadeInStart: {thirdFadeInStart}</p>
         <p>fourthFadeInStart: {fourthFadeInStart}</p>
         <p>fifthFadeInStart: {fifthFadeInStart}</p>
+        <p>sixthFadeInStart: {sixthFadeInStart}</p>
       </div>
-      */}
 
   {/* Scroll height control - increased to allow full fade + fifth section */}
   <div className="min-h-[800vh] bg-black"></div>

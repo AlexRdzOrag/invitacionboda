@@ -125,7 +125,11 @@ export default function Home() {
     fourthHoldDuration: 250,        // Hold fourth fully visible
     fourthFadeOutDuration: 400,     // Fade out duration for fourth
     gapAfterFourth: 300,            // Gap after fourth disappears before fifth starts
-    fifthFadeDuration: 400          // Fade in duration for fifth
+    fifthFadeDuration: 400,         // Fade in duration for fifth
+    fifthHoldDuration: 250,         // Hold fifth fully visible
+    fifthFadeOutDuration: 400,      // Fade out duration for fifth
+    gapAfterFifth: 300,             // Gap after fifth disappears before sixth starts
+    sixthFadeDuration: 400          // Fade in duration for sixth (RSVP)
   } as const;
 
   const contentScroll = Math.max(smoothScroll - TIMING.firstHoldEnd, 0);
@@ -223,14 +227,34 @@ export default function Home() {
   const fourthFadeOutEnd = fourthFadeOutStart + TIMING.fourthFadeOutDuration;
   const fifthFadeInStart = fourthFadeOutEnd + TIMING.gapAfterFourth;
   const fifthFadeInEnd = fifthFadeInStart + TIMING.fifthFadeDuration;
+  const fifthHoldEnd = fifthFadeInEnd + TIMING.fifthHoldDuration;
+  const fifthFadeOutStart = fifthHoldEnd;
+  const fifthFadeOutEnd = fifthFadeOutStart + TIMING.fifthFadeOutDuration;
+  const sixthFadeInStart = fifthFadeOutEnd + TIMING.gapAfterFifth;
+  const sixthFadeInEnd = sixthFadeInStart + TIMING.sixthFadeDuration;
 
   let fifthOpacity: number;
   if (smoothScroll < fifthFadeInStart) {
     fifthOpacity = 0;
   } else if (smoothScroll < fifthFadeInEnd) {
     fifthOpacity = (smoothScroll - fifthFadeInStart) / TIMING.fifthFadeDuration; // fade in
+  } else if (smoothScroll < fifthHoldEnd) {
+    fifthOpacity = 1; // hold
+  } else if (smoothScroll < fifthFadeOutEnd) {
+    const progress = (smoothScroll - fifthFadeOutStart) / TIMING.fifthFadeOutDuration;
+    fifthOpacity = 1 - progress; // fade out
   } else {
-    fifthOpacity = 1;
+    fifthOpacity = 0;
+  }
+
+  // Sixth (RSVP) section opacity
+  let sixthOpacity: number;
+  if (smoothScroll < sixthFadeInStart) {
+    sixthOpacity = 0;
+  } else if (smoothScroll < sixthFadeInEnd) {
+    sixthOpacity = (smoothScroll - sixthFadeInStart) / TIMING.sixthFadeDuration; // fade in
+  } else {
+    sixthOpacity = 1;
   }
 
   return (
@@ -503,6 +527,35 @@ export default function Home() {
                     <p className="text-2xl italic text-gray-700">
                       El mejor regalo es tu presencia
                     </p>
+                  </div>
+                </section>
+              </article>
+            </div>
+
+            {/* Section 6: RSVP WhatsApp - appears after section 5 fades out */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <article className="p-6 sm:p-8 md:p-10 max-w-[390px] w-full min-h-screen flex flex-col justify-center">
+                <section
+                  aria-labelledby="rsvp-title"
+                  className="transition-opacity duration-150"
+                  style={{ opacity: sixthOpacity }}
+                >
+                  <h2 id="rsvp-title" className="text-3xl text-gray-900 text-center mb-8">
+                    Desea confirmar su asistencia?
+                  </h2>
+                  <div className="flex justify-center">
+                    <a
+                      href="https://wa.me/525550726143?text=Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-green-600 text-white text-2xl rounded-full hover:bg-green-700 transition-colors duration-200 shadow-lg font-semibold"
+                      aria-label="Confirmar asistencia por WhatsApp"
+                    >
+                      <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.52 3.48A11.87 11.87 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.22-1.63A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22c-1.85 0-3.67-.5-5.24-1.44l-.37-.22-3.69.97.99-3.59-.24-.37A9.94 9.94 0 012 12C2 6.48 6.48 2 12 2c2.54 0 4.93.99 6.73 2.77A9.93 9.93 0 0122 12c0 5.52-4.48 10-10 10zm5.2-7.6c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.41-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.51.14-.17.18-.29.28-.48.09-.19.05-.36-.02-.5-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.62-.47-.16-.01-.36-.01-.56-.01-.19 0-.5.07-.76.34-.26.27-1 1-.97 2.43.03 1.43 1.03 2.81 1.18 3 .15.19 2.03 3.1 4.93 4.23.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.12.56-.08 1.65-.67 1.88-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/>
+                      </svg>
+                      Confirmar por WhatsApp
+                    </a>
                   </div>
                 </section>
               </article>

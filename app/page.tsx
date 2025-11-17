@@ -108,28 +108,30 @@ export default function Home() {
 
   // Content scrolls up after curtains open
   // Timing configuration for section transitions
+  // Adjusted timings to ensure sixth section becomes reachable within 800vh scroll range
   const TIMING = {
-    firstHoldEnd: 600,              // When contentScroll begins
-    firstFadeOutStartContent: 400,  // Content scroll value where first starts fading
-    firstFadeOutEndContent: 800,    // Content scroll value where first fully gone
-    gapAfterFirst: 80,              // Reduced gap before second starts
-    secondFadeDuration: 400,        // Fade in duration for second
-    secondHoldDuration: 250,        // Hold second fully visible
-    secondFadeOutDuration: 400,     // Fade out duration for second
-    gapAfterSecond: 300,            // Gap after second disappears before third starts
-    thirdFadeDuration: 400,         // Fade in duration for third
-    thirdHoldDuration: 250,         // Hold third fully visible
-    thirdFadeOutDuration: 400,      // Fade out duration for third
-    gapAfterThird: 300,             // Gap after third disappears before fourth starts
-    fourthFadeDuration: 400,        // Fade in duration for fourth
-    fourthHoldDuration: 250,        // Hold fourth fully visible
-    fourthFadeOutDuration: 400,     // Fade out duration for fourth
-    gapAfterFourth: 300,            // Gap after fourth disappears before fifth starts
-    fifthFadeDuration: 400,         // Fade in duration for fifth
-    fifthHoldDuration: 250,         // Hold fifth fully visible
-    fifthFadeOutDuration: 400,      // Fade out duration for fifth
-    gapAfterFifth: 300,             // Gap after fifth disappears before sixth starts
-    sixthFadeDuration: 400          // Fade in duration for sixth (RSVP)
+    firstHoldEnd: 600,
+    firstFadeOutStartContent: 400,
+    firstFadeOutEndContent: 800,
+    gapAfterFirst: 80,
+    secondFadeDuration: 400,
+    secondHoldDuration: 250,
+    secondFadeOutDuration: 400,
+    gapAfterSecond: 300,
+    thirdFadeDuration: 400,
+    thirdHoldDuration: 250,
+    thirdFadeOutDuration: 400,
+    gapAfterThird: 300,
+    fourthFadeDuration: 400,
+    fourthHoldDuration: 250,
+    fourthFadeOutDuration: 400,
+    gapAfterFourth: 300,
+    fifthFadeDuration: 400,
+    // compressed fifth section timings so sixth starts earlier
+    fifthHoldDuration: 150,
+    fifthFadeOutDuration: 250,
+    gapAfterFifth: 50,
+    sixthFadeDuration: 400
   } as const;
 
   const contentScroll = Math.max(smoothScroll - TIMING.firstHoldEnd, 0);

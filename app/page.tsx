@@ -277,6 +277,7 @@ export default function Home() {
         </div>
       )}
 
+      {/** Debug info temporarily disabled
       <div className="fixed top-4 left-4 bg-black bg-opacity-75 text-white p-4 text-xs z-50 font-mono">
         <p>smoothScroll: {Math.round(smoothScroll)}</p>
         <p>contentScroll: {Math.round(contentScroll)}</p>
@@ -294,6 +295,7 @@ export default function Home() {
         <p>fifthFadeInStart: {fifthFadeInStart}</p>
         <p>sixthFadeInStart: {sixthFadeInStart}</p>
       </div>
+      */}
 
   {/* Scroll height control - increased to allow all six sections */}
   <div className="min-h-[1000vh] bg-black"></div>

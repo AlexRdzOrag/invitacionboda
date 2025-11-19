@@ -295,8 +295,8 @@ export default function Home() {
         <p>sixthFadeInStart: {sixthFadeInStart}</p>
       </div>
 
-  {/* Scroll height control - increased to allow full fade + fifth section */}
-  <div className="min-h-[800vh] bg-black"></div>
+  {/* Scroll height control - increased to allow all six sections */}
+  <div className="min-h-[1000vh] bg-black"></div>
 
       {/* Fixed visual layer */}
       <div className="fixed inset-0 flex justify-center items-center overflow-hidden">
